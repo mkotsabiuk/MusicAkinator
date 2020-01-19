@@ -23,6 +23,3 @@ def get_song(request):
         )
     else:
         return JsonResponse(data={"status": "not found"})
-
-
-
