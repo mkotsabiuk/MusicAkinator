@@ -120,4 +120,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     './file_storage',
-]
+] 
+
+CORS_ORIGIN_ALLOW_ALL = True
+
