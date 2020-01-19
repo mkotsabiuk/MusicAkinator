@@ -1,10 +1,7 @@
-import json
-
 import requests
 from django.http import JsonResponse
-import json
 
-from ..config import config
+from .config import config
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import UploadFileForm
