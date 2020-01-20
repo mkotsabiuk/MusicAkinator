@@ -24,6 +24,9 @@ SECRET_KEY = '5nggi0t(+uzhf8d3-)s+l%5cj_i#_6kt5l@dj)0i*tdnlk#crc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
+ALLOWED_HOSTS = ['*']
+=======
 CONFIG = {
 
     "audd.io_token": 'fa9f5a0e520c64bed4654cc54bdd660e',
@@ -35,6 +38,7 @@ ALLOWED_HOSTS = [
     'localhost'
 
 ]
+>>>>>>> 44e649ebb1d46f5cce097a5745f4f077cfaf2b36
 
 # Application definition
 
@@ -86,6 +90,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DON'T TOUCH THIS!
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -126,6 +137,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     '../file_storage'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True

@@ -1,7 +1,8 @@
 from django.urls import path, include
 
-from recognizer.views import get_song
+from recognizer import views
 
 urlpatterns = [
-    path('get_song', get_song),
+    path('upload_file', views.upload_file, name='upload-file'),
+    path('get_song/<path:file_url>', views.get_song, name='get-song'),
 ]
