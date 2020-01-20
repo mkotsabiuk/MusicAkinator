@@ -4,14 +4,11 @@ from django.http import JsonResponse
 from .config import config
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import UploadFileForm
 from .utils import handle_uploaded_file, get_file_name
 
 
 @csrf_exempt
 def get_song(request):
-    form = UploadFileForm(request.POST, request.FILES)
-
     file_name = get_file_name()
     handle_uploaded_file(file_name, request.FILES['file'])
 
@@ -22,7 +19,6 @@ def get_song(request):
     }
 
     result = requests.post('https://api.audd.io/', data=data).json()
-
 
     return JsonResponse(
         data={
