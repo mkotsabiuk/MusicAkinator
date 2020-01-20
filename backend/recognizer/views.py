@@ -1,10 +1,11 @@
 import requests
 from django.http import JsonResponse
 
-from .config import config
 from django.views.decorators.csrf import csrf_exempt
 
 from .utils import handle_uploaded_file, get_file_name
+
+from backend.settings import CONFIG
 
 
 @csrf_exempt
@@ -13,9 +14,9 @@ def get_song(request):
     handle_uploaded_file(file_name, request.FILES['file'])
 
     data = {
-        'url': f'{config["base_url"]}/static/{file_name}',
+        'url': f'{CONFIG["base_url"]}/static/{file_name}',
         'return': 'deezer',
-        'api_token': config["audd.io_token"]
+        'api_token': CONFIG["audd.io_token"]
     }
 
     result = requests.post('https://api.audd.io/', data=data).json()
