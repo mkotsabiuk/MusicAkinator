@@ -24,10 +24,7 @@ SECRET_KEY = '5nggi0t(+uzhf8d3-)s+l%5cj_i#_6kt5l@dj)0i*tdnlk#crc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vlad-bvjn.localhost.run',
-                 'localhost'
-
-                 ]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -79,6 +76,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DON'T TOUCH THIS!
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -119,6 +123,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     '../file_storage'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
