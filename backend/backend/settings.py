@@ -24,14 +24,16 @@ SECRET_KEY = '5nggi0t(+uzhf8d3-)s+l%5cj_i#_6kt5l@dj)0i*tdnlk#crc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['*']
 
 CONFIG = {
+
     "audd.io_token": 'fa9f5a0e520c64bed4654cc54bdd660e',
-    "base_url": "https://vlad-jbsn.localhost.run"
+    "base_url": "https://vlad-jtrh.localhost.run"
 }
 
-ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 INSTALLED_APPS = [
