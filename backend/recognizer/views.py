@@ -2,34 +2,36 @@ import requests
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
+from backend.settings import CONFIG
 
 
+@csrf_exempt
 def upload_file(request):
-    counter = 1
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
+    if request.method == 'POST' and request.FILES['file']:
+        file = request.FILES['file']
         fs = FileSystemStorage()
 
-        filename = fs.save(str(counter)+'.mp3', myfile)
-        counter += 1
+        filename = fs.save('', file)
 
         uploaded_file_url = fs.url(filename)
 
-        # return render(request, 'upload.html', {
-        #     'uploaded_file_url': uploaded_file_url
-        # })
+        return redirect('get-by-song', file_url=uploaded_file_url)
 
-        # return redirect('get-song', file_url=uploaded_file_url)
-        return redirect('get-by-humming', file_url=uploaded_file_url)
-
-    return render(request, 'upload.html')
+    else:
+        return JsonResponse(
+            data={
+                "status": 'Upload error',
+            }
+        )
 
 
 def get_by_song(request, file_url):
     data = {
-        'url': 'http://73c7b7ea.ngrok.io'+file_url,  # place tunnel url before file_url
+        'url': CONFIG['base_url'] + file_url,
         'return': 'deezer',
-        'api_token': '80af3a2f63cc041bd1661be79a63c322'
+        'api_token': CONFIG['audd.io_token']
     }
 
     res = requests.post('https://api.audd.io/', data=data).json()
@@ -46,8 +48,8 @@ def get_by_song(request, file_url):
 
 def get_by_humming(request, file_url):
     data = {
-        'url': 'http://73c7b7ea.ngrok.io' + file_url,  # place tunnel url before file_url
-        'api_token': '80af3a2f63cc041bd1661be79a63c322'
+        'url': CONFIG['base_url'] + file_url,
+        'api_token': CONFIG['audd.io_token']
     }
 
     res = requests.post('https://api.audd.io/recognizeWithOffset/', data=data).json()
