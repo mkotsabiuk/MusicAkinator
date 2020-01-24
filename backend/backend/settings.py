@@ -26,12 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CONFIG = {
-    "audd.io_token": 'fa9f5a0e520c64bed4654cc54bdd660e',
-    "base_url": "https://vlad-jbsn.localhost.run"
-}
-
-ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -135,3 +129,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+AUDDIO_KEY = 'fa9f5a0e520c64bed4654cc54bdd660e'
