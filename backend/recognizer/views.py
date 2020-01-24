@@ -1,16 +1,18 @@
 import os
 import uuid
 
-from backend.settings import BASE_DIR, AUDDIO_KEY
+from backend.settings import BASE_DIR, AUDDIO_KEY, TUNNEL_URL
 import requests
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def upload_file(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
+    if request.method == 'POST' and request.FILES['file']:
+        myfile = request.FILES['file']
         fs = FileSystemStorage()
 
         filename = fs.save(uuid.uuid4().hex + '.mp3', myfile)
@@ -23,7 +25,7 @@ def upload_file(request):
 
 def get_by_song(request, file_url):
     data = {
-        'url': ''+file_url,  # place tunnel url before file_url
+        'url': TUNNEL_URL + file_url,
         'return': 'deezer',
         'api_token': AUDDIO_KEY
     }
