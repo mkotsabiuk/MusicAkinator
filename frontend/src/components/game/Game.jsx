@@ -149,37 +149,42 @@ class Game extends Component {
         />
         <div className={"listOfSongs " + this.state.showListOfSongs}>
           {this.tracks.map(function(item) {
-            return (
-              <iframe
+              return (
+                <div class="iFramesVertical">
+                <iframe
+                class="iFrames"
                 scrolling="no"
                 frameborder="0"
                 allowTransparency="true"
                 src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${item}`}
-                width="700"
-                height="150"
-              ></iframe>
+                          width="70%"
+                          height="20%"
+              ></iframe></div>
             );
           })}
         </div>
         <div className={"textRed answer " + this.state.showAnswer}>
           <div>
-            <p>
+            <p class="answerUHave">
               You have wished a song:{" "}
               {this.state.lyricResponce?.song_name || ""}
             </p>
-          </div>
-          <iframe
+                </div>
+            <div class="iFramesVertical">
+            <iframe
+            class="iFrames"
             scrolling="no"
             frameborder="0"
             allowTransparency="true"
             src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${this.state.lyricResponce.track_id}`}
-            width="700"
-            height="150"
-          ></iframe>
-          <div>
+                        width="70%"
+                        height="20%"
+
+          ></iframe></div>
+          <div class="ansverAmICorect">
             <p>Am I corect?</p>
-            <button onClick={this.onCorrectAnswerClick}>YES</button>
-            <button onClick={this.onIncorrectAnswerClick}>NO</button>
+            <button class="answerYesNo1" onClick={this.onCorrectAnswerClick}>YES</button>
+            <button class="answerYesNo2" onClick={this.onIncorrectAnswerClick}>NO</button>
           </div>
         </div>
 
