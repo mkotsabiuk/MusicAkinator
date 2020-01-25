@@ -32,3 +32,17 @@ TUNNEL_URL = 'HERE'
 ```
 $ python3 manage.py runserver
 ```
+
+## How to RUN frontend local?
+
+Make sure you are in **frontend** folder
+
+Run following commands
+
+``` 
+npm install
+
+npm start
+
+```
+Go to localhost:3000
