@@ -1,4 +1,6 @@
+import json
 import os
+import re
 import uuid
 
 from backend.settings import BASE_DIR, AUDDIO_KEY, TUNNEL_URL
@@ -7,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.core.handlers.wsgi import WSGIRequest
 
 
 @csrf_exempt
@@ -21,6 +24,31 @@ def upload_file(request):
         return redirect('get-by-song', file_url=uploaded_file_url)
 
     return render(request, 'upload.html')
+
+
+@csrf_exempt
+def recognize_by_lyrics(request: WSGIRequest):
+    json_data = json.loads(request.body)
+
+    audd_response = requests.post(
+        f'https://api.audd.io/findLyrics?q={json_data["lyric"]}&api_token={AUDDIO_KEY}').json()
+
+    query = audd_response["result"][0]["title"]
+
+    query = re.findall('[a-zA-Z ]+', query)
+
+    deezer_response = requests.get(f'https://api.deezer.com/search?q=track:"{query}"').json()
+
+    print(deezer_response['data'][0]['preview'])
+
+    return JsonResponse(
+        data={
+            "status": 200,
+            "song_name": deezer_response['data'][0]['title'],
+            "path_to_artist_image": deezer_response['data'][0]['artist']['picture'],
+            "path_to_audio": deezer_response['data'][0]['preview'],
+        }
+    )
 
 
 def get_by_song(request, file_url):
