@@ -131,4 +131,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 AUDDIO_KEY = 'fa9f5a0e520c64bed4654cc54bdd660e'
-TUNNEL_URL = 'https://vlad-o5my.localhost.run'
+
+TUNNEL_URL = 'HERE'
