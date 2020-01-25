@@ -26,7 +26,7 @@ class Game extends Component {
     this.onIncorrectAnswerClick = this.onIncorrectAnswerClick.bind(this);
 
     this.tracks = [];
-    this.numberOfAttempt = 2;
+    this.numberOfAttempt = 5;
 
     this.state = {
       showPlayButton: "",
