@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MusicKey from "./MusicKey";
 import "./Footer.css";
-import musicKey from "./musicKey.svg";
 import blackBuildings from "./Buildings__Black.png";
 import whiteBuildings from "./Buildings__White.png";
 
