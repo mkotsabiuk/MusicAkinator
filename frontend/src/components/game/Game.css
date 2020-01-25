@@ -38,3 +38,50 @@
 .textRed {
   color: red;
 }
+.singOrPaste{
+    text-align:center;
+    padding-top:7%;
+}
+.singOrPaste > button {
+    font-size: 2vw;
+    font-weight: 600;
+    font-family: "Montserrat";
+    text-align: center;
+    padding: 5% 1.4%;
+    background-color: aliceblue;
+    border-radius: 32%;
+}
+.singOrPaste> *:nth-child(2){
+    margin-left:20%;
+}
+.textArea {
+    text-align: center;
+    margin-top: 13%;
+}
+    .textArea textarea {
+        font-size: 2vw;
+        font-weight: 600;
+        font-family: "Montserrat";
+        text-align: center;
+        padding-top: 4%;
+        margin-top: 2%;
+        padding: 0 10% 10% 10%;
+    }
+button.textRed {
+    color: black;
+    padding: 2.7% 2.7% 2.7% 2.7%;
+    border-radius: 22%;
+    background-color: white;
+    vertical-align: top;
+    margin-top: 6%;
+    font-size: 5vw;
+    font-weight: 600;
+    font-family: "Montserrat";
+}
+.textArea  p {
+    font-size: 2.5vw;
+    font-weight: 400;
+    font-family: "Montserrat";
+    text-align: center;
+    color:aliceblue;
+}

@@ -111,11 +111,15 @@ class Game extends Component {
           />
         </div>
         <div className={"textArea " + this.state.showTextArea}>
-          <p className="textRed">Paste text of the song</p>
-          <textarea
+                <div class="pForTextArea">
+                <p className="textRed">Paste text of the song</p>
+
+                <textarea
             value={this.state.value}
             onChange={this.onLyricChange}
-          ></textarea>
+                >
+                </textarea>
+            </div>
           <button className="textRed" onClick={this.onGuessByTextClick}>
             Go
           </button>
