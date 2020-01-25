@@ -47,7 +47,6 @@ class Game extends Component {
           <div className="play">
             <p>play</p>
           </div>
-          {/* <img className="play" src={playButton} alt="Play button"></img> */}
           <img
             className="playButtonConture"
             src={playButtonConture}

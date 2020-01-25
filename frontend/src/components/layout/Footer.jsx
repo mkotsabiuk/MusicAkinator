@@ -3,6 +3,7 @@ import MusicKey from "./MusicKey";
 import "./Footer.css";
 import blackBuildings from "./Buildings__Black.png";
 import whiteBuildings from "./Buildings__White.png";
+import citys from "./citys.png";
 
 class Footer extends Component {
   constructor(props) {
@@ -14,11 +15,9 @@ class Footer extends Component {
       <div className="thirdSection">
         <div className="buttomSector">
           <div className="imgBack">
-            <img src={blackBuildings}></img>
+            <img src={citys} />
           </div>
-          <div className="imgFront">
-            <img src={whiteBuildings}></img>
-          </div>
+
           <div className="musicAnimationContainer">
             <MusicKey
               from={{ rotation: -15, x: -10 }}
