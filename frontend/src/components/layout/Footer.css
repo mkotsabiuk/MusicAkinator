@@ -6,10 +6,10 @@
 .imgFront > img {
   width: 100%;
 }
-.imgBack,
+/* .imgBack,
 .imgFront {
   position: relative;
-}
+} */
 .imgFront {
   z-index: 1;
 }

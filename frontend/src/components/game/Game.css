@@ -2,14 +2,31 @@
   width: 100%;
   margin-top: 20%;
   margin-bottom: 0;
-  /* margin: 20% auto 0%; */
   background-color: black;
 }
 
+.play {
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+  font-size: 1.5vw;
+  font-weight: 400;
+  font-family: "Montserrat";
+  text-align: center;
+}
+.play > p {
+  zoom: 400%;
+}
+.playButtonConture {
+  width: 100%;
+}
 .conteinerbodywithanim {
   width: 35%;
   margin-top: 20%;
   margin: 20% auto 0%;
   padding-top: 10%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

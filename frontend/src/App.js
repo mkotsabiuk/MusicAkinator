@@ -9,7 +9,6 @@ function App() {
       <Header />
       <div style={{ backgroundColor: "black" }}>
         <Game />
-
         <Footer />
       </div>
     </div>
