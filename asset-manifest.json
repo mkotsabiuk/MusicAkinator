@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ma/static/css/main.d0e38e45.chunk.css",
+    "main.js": "/ma/static/js/main.eb0bb577.chunk.js",
+    "main.js.map": "/ma/static/js/main.eb0bb577.chunk.js.map",
+    "runtime-main.js": "/ma/static/js/runtime-main.a8805b8d.js",
+    "runtime-main.js.map": "/ma/static/js/runtime-main.a8805b8d.js.map",
+    "static/js/2.7b5d8ea4.chunk.js": "/ma/static/js/2.7b5d8ea4.chunk.js",
+    "static/js/2.7b5d8ea4.chunk.js.map": "/ma/static/js/2.7b5d8ea4.chunk.js.map",
+    "index.html": "/ma/index.html",
+    "precache-manifest.d96655e956c77641c10f7dce38efa192.js": "/ma/precache-manifest.d96655e956c77641c10f7dce38efa192.js",
+    "service-worker.js": "/ma/service-worker.js",
+    "static/css/main.d0e38e45.chunk.css.map": "/ma/static/css/main.d0e38e45.chunk.css.map",
+    "static/js/2.7b5d8ea4.chunk.js.LICENSE": "/ma/static/js/2.7b5d8ea4.chunk.js.LICENSE",
+    "static/media/citys.png": "/ma/static/media/citys.156adf41.png",
+    "static/media/musicKey.svg": "/ma/static/media/musicKey.0df35fa7.svg",
+    "static/media/playButtonConture.svg": "/ma/static/media/playButtonConture.33b6e009.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a8805b8d.js",
+    "static/js/2.7b5d8ea4.chunk.js",
+    "static/css/main.d0e38e45.chunk.css",
+    "static/js/main.eb0bb577.chunk.js"
+  ]
+}

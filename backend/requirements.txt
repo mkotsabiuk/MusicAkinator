@@ -1,3 +1,0 @@
-django
-drf_yasg
-django-cors-headers
