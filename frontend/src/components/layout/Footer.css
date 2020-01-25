@@ -1,15 +1,11 @@
 .thirdSection {
   background-color: black;
-  /* margin-top: 15%; */
 }
 .imgBack > img,
 .imgFront > img {
   width: 100%;
 }
-/* .imgBack,
-.imgFront {
-  position: relative;
-} */
+
 .imgFront {
   z-index: 1;
 }
