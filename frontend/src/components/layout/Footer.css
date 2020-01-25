@@ -1,0 +1,44 @@
+.thirdSection {
+  background-color: black;
+  margin-top: 15%;
+}
+.imgBack > img,
+.imgFront > img {
+  width: 100%;
+}
+.imgBack,
+.imgFront {
+  position: relative;
+}
+.imgFront {
+  z-index: 1;
+}
+.imgBack {
+  z-index: 2;
+  top: 150px;
+}
+.musicAnimationContainer > * {
+  width: 3%;
+  display: inline-block;
+  padding-left: 12%;
+}
+.musicAnimationContainer {
+  position: relative;
+  z-index: 3;
+  top: -50px;
+}
+.buttomSector {
+  margin-top: 20%;
+}
+.buttomSector > .divForP > p {
+  font-size: 1.5em;
+  font-weight: 400;
+  font-family: "Montserrat";
+  text-align: center;
+  padding-bottom: 5%;
+  color: white;
+}
+.buttomSector > .divForP {
+  width: 100%;
+  background-color: black;
+}

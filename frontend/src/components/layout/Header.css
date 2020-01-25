@@ -1,0 +1,44 @@
+.firstSection {
+  background-color: #ffffff;
+  margin-top: 20%;
+}
+.mText {
+  width: 100%;
+}
+.gMusic {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 3.5em;
+  text-align: center;
+}
+.gMusic:first-letter {
+  font-size: 1.5em;
+}
+.teamPresent {
+  margin-top: 5%;
+  font-size: 1.5em;
+  font-weight: 400;
+  font-family: "Montserrat";
+  text-align: center;
+}
+.firstSection > .buttomLine {
+  height: 3px;
+  margin-top: 20%;
+  background-color: black;
+}
+
+.secondSection {
+  margin-top: 15%;
+}
+.secondSection > .text {
+  font-size: 1.7em;
+  font-weight: 500;
+  font-family: "Montserrat";
+  line-height: 200%;
+  text-align: center;
+}
+.secondSection > .img {
+  width: 10%;
+  margin: 0 auto;
+  margin-top: 10%;
+}
