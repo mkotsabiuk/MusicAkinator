@@ -39,7 +39,6 @@ def recognize_by_lyrics(request: WSGIRequest):
 
     deezer_response = requests.get(f'https://api.deezer.com/search?q=track:"{query}"').json()
 
-    print(deezer_response['data'][0]['preview'])
 
     return JsonResponse(
         data={
