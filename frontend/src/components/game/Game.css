@@ -1,0 +1,15 @@
+.playButton {
+  width: 100%;
+  margin-top: 20%;
+  margin-bottom: 0;
+  /* margin: 20% auto 0%; */
+  background-color: black;
+}
+
+.conteinerbodywithanim {
+  width: 35%;
+  margin-top: 20%;
+  margin: 20% auto 0%;
+  padding-top: 10%;
+  cursor: pointer;
+}
