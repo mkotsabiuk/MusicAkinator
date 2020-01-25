@@ -22,17 +22,24 @@ class Game extends Component {
     this.onPasteTextClick = this.onPasteTextClick.bind(this);
     this.onLyricChange = this.onLyricChange.bind(this);
     this.onGuessByTextClick = this.onGuessByTextClick.bind(this);
+    this.onCorrectAnswerClick = this.onCorrectAnswerClick.bind(this);
+    this.onIncorrectAnswerClick = this.onIncorrectAnswerClick.bind(this);
+
+    this.tracks = [];
+    this.numberOfAttempt = 2;
 
     this.state = {
       showPlayButton: "",
       showSingOrPasteButtons: "hidden",
       showTextArea: "hidden",
-      showScore: "hidden",
       lyric: "",
       computerPoints: 0,
       userPoints: 0,
       showAnswer: "hidden",
-      lyricResponce: {}
+      lyricResponce: {},
+      attempt: 1,
+      textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`,
+      showListOfSongs: "hidden"
     };
   }
 
@@ -41,10 +48,11 @@ class Game extends Component {
   }
 
   onPlayClick() {
+    this.tracks = [];
     this.setState({
       showPlayButton: "hidden",
       showSingOrPasteButtons: "",
-      showScore: ""
+      showListOfSongs: "hidden"
     });
     console.log(this.state);
   }
@@ -52,10 +60,7 @@ class Game extends Component {
   onPasteTextClick() {
     this.setState({
       showSingOrPasteButtons: "hidden",
-      showTextArea: "",
-      showScore: "",
-      computerPoints: 0,
-      userPoints: 0
+      showTextArea: ""
     });
   }
 
@@ -73,8 +78,11 @@ class Game extends Component {
     this.setState({
       lyricResponce: song.data,
       textarea: "hide",
-      showAnswer: ""
+      showAnswer: "",
+      showTextArea: "hidden",
+      lyric: ""
     });
+    this.tracks.push(this.state.lyricResponce.track_id);
   }
 
   mouseLeave() {
@@ -94,14 +102,64 @@ class Game extends Component {
     this.setState({ lyric: event.target.value });
   }
 
+  onIncorrectAnswerClick() {
+    console.log(this.state.attempt);
+    if (this.state.attempt === this.numberOfAttempt) {
+      this.setState({
+        attempt: 0,
+        userPoints: this.state.userPoints + 1,
+        showPlayButton: "",
+        showAnswer: "hidden",
+        textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`,
+        showTextArea: "hidden",
+        showListOfSongs: ""
+      });
+
+      return;
+    }
+
+    this.setState({
+      attempt: this.state.attempt + 1,
+      showAnswer: "hidden",
+      textareaMessage: `Let's try again! This is my ${this.state.attempt +
+        1} attempt out of ${this.numberOfAttempt}.`,
+      showTextArea: "",
+      showAnswer: "hidden",
+      showListOfSongs: "hidden"
+    });
+  }
+
+  onCorrectAnswerClick() {
+    this.setState({
+      attempt: 0,
+      computerPoints: this.state.computerPoints + 1,
+      showPlayButton: "",
+      showAnswer: "hidden",
+      showListOfSongs: "",
+      textareaMessage: `Paste text of the song! This is my ${this.state.attempt} attempt out of ${this.numberOfAttempt}.`
+    });
+  }
+
   render() {
     return (
       <div className="playButton">
-        <div className={this.state.showScore}>
-          <Score
-            first={this.state.userPoints}
-            second={this.state.computerPoints}
-          />
+        <Score
+          first={this.state.userPoints}
+          second={this.state.computerPoints}
+        />
+        <div className={"listOfSongs " + this.state.showListOfSongs}>
+          {this.tracks.map(function(item) {
+            return (
+              <iframe
+                scrolling="no"
+                frameborder="0"
+                allowTransparency="true"
+                src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${item}`}
+                width="700"
+                height="150"
+              ></iframe>
+            );
+          })}
         </div>
         <div className={"textRed answer " + this.state.showAnswer}>
           <div>
@@ -110,23 +168,23 @@ class Game extends Component {
               {this.state.lyricResponce?.song_name || ""}
             </p>
           </div>
-          {/* <iframe
-          scrolling="no"
-          frameborder="0"
-          allowTransparency="true"
-          src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${this.state.lyricResponce.}`}
-          width="700"
-          height="150"
-          ></iframe>  */}
+          <iframe
+            scrolling="no"
+            frameborder="0"
+            allowTransparency="true"
+            src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${this.state.lyricResponce.track_id}`}
+            width="700"
+            height="150"
+          ></iframe>
           <div>
             <p>Am I corect?</p>
-            <button>YES</button>
-            <button>NO</button>
+            <button onClick={this.onCorrectAnswerClick}>YES</button>
+            <button onClick={this.onIncorrectAnswerClick}>NO</button>
           </div>
         </div>
 
         <div className={"singOrPaste " + this.state.showSingOrPasteButtons}>
-          <button>Sing song</button>
+          <button disabled>Sing song</button>
           <button onClick={this.onPasteTextClick}>Paste text</button>
         </div>
 
@@ -148,12 +206,16 @@ class Game extends Component {
           />
         </div>
         <div className={"textArea " + this.state.showTextArea}>
-          <p className="textRed">Paste text of the song</p>
-          <textarea
-            value={this.state.value}
-            onChange={this.onLyricChange}
-          ></textarea>
-          <button onClick={this.onGuessByTextClick}>Go</button>
+          <div class="pForTextArea">
+            <p className="textRed">{this.state.textareaMessage}</p>
+            <textarea
+              value={this.state.lyric}
+              onChange={this.onLyricChange}
+            ></textarea>
+          </div>
+          <button className="textRed" onClick={this.onGuessByTextClick}>
+            Go
+          </button>
         </div>
       </div>
     );
@@ -161,14 +223,3 @@ class Game extends Component {
 }
 
 export default Game;
-
-{
-  /* <iframe
-scrolling="no"
-frameborder="0"
-allowTransparency="true"
-src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=655095912"
-width="700"
-height="150"
-></iframe> */
-}
