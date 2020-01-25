@@ -1,18 +1,10 @@
 .thirdSection {
   background-color: black;
 }
-.imgBack > img,
-.imgFront > img {
+.imgBack > img {
   width: 100%;
 }
 
-.imgFront {
-  z-index: 1;
-}
-.imgBack {
-  z-index: 2;
-  top: 150px;
-}
 .musicAnimationContainer > * {
   width: 3%;
   display: inline-block;
@@ -21,7 +13,7 @@
 .musicAnimationContainer {
   position: relative;
   z-index: 3;
-  top: -50px;
+  top: -80px;
 }
 .buttomSector {
   margin-top: 20%;
