@@ -37,8 +37,7 @@ def recognize_by_lyrics(request: WSGIRequest):
 
     query = re.findall('[a-zA-Z ]+', query)
 
-    deezer_response = requests.get(f'https://api.deezer.com/search?q=track:"{query}"').json()
-
+    deezer_response = requests.get(f'https://api.deezer.com/search?q=track:"{query[0]}"').json()
 
     return JsonResponse(
         data={
