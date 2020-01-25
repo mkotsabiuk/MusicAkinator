@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2201eb328b323750d2a1c27846221af9",
+    "revision": "40c9aabfebb463e94ab2fd22fbbfeb65",
     "url": "/MusicAkinator/index.html"
   },
   {
-    "revision": "2df299ca7a5a1f755125",
-    "url": "/MusicAkinator/static/css/main.d0e38e45.chunk.css"
+    "revision": "1c2be894553aa19fd18c",
+    "url": "/MusicAkinator/static/css/main.90117b43.chunk.css"
   },
   {
     "revision": "c75537cfab4b7cf9f832",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MusicAkinator/static/js/2.7b5d8ea4.chunk.js.LICENSE"
   },
   {
-    "revision": "2df299ca7a5a1f755125",
-    "url": "/MusicAkinator/static/js/main.7fcd0bdc.chunk.js"
+    "revision": "1c2be894553aa19fd18c",
+    "url": "/MusicAkinator/static/js/main.0fb88307.chunk.js"
   },
   {
     "revision": "3a86c1eb4febfe597f57",
