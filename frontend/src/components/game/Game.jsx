@@ -26,8 +26,10 @@ class Game extends Component {
       showPlayButton: "",
       showSingOrPasteButtons: "hiden",
       showTextArea: "hiden",
-      showScore: "",
-      lyric: ""
+      showScore: "hiden",
+      lyric: "",
+      computerPoints: 0,
+      userPoints: 0
     };
   }
 
@@ -41,7 +43,13 @@ class Game extends Component {
   }
 
   onPasteTextClick() {
-    this.setState({ showSingOrPasteButtons: "hiden", showTextArea: "" });
+    this.setState({
+      showSingOrPasteButtons: "hiden",
+      showTextArea: "",
+      showScore: "",
+      computerPoints: 0,
+      userPoints: 0
+    });
   }
 
   onGuessByTextClick() {
@@ -75,7 +83,10 @@ class Game extends Component {
     return (
       <div className="playButton">
         <div className={this.state.showScore}>
-          <Score first={4} second={6} />
+          <Score
+            first={this.state.userPoints}
+            second={this.state.computerPoints}
+          />
         </div>
         <div className={"singOrPaste " + this.state.showSingOrPasteButtons}>
           <button>Sing song</button>
