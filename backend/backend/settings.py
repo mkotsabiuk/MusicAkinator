@@ -24,7 +24,9 @@ SECRET_KEY = '5nggi0t(+uzhf8d3-)s+l%5cj_i#_6kt5l@dj)0i*tdnlk#crc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    "music-akinator.azurewebsites.net"
+]
 
 # Application definition
 

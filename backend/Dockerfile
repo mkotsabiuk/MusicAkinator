@@ -1,14 +1,9 @@
-# pull official base image
-FROM python:3.8.0-alpine
-
-# set work directory
-WORKDIR /usr/src/app
-
-# install dependencies
-RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/src/app/requirements.txt
-RUN pip install -r requirements.txt
-
-# copy project
-COPY . /usr/src/app/
+FROM tiangolo/uwsgi-nginx:python3.6-alpine3.7
+LABEL Name=code6 Version=0.0.1
 EXPOSE 8000
+ENV LISTEN_PORT=8000
+WORKDIR /app
+ADD . /app
+RUN chmod g+w /app
+RUN chmod g+w /app/db.sqlite3
+RUN python3 -m pip install -r requirements.txt
