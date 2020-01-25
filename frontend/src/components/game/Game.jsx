@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
 import Score from "./Score";
 import playButtonConture from "./playButtonConture.svg";
 import "./Game.css";
 
-const baseUrl = "https://localhost:800/";
+const baseUrl = "http://localhost:8000/";
 
 class Game extends Component {
   constructor(props) {
@@ -24,12 +25,14 @@ class Game extends Component {
 
     this.state = {
       showPlayButton: "",
-      showSingOrPasteButtons: "hiden",
-      showTextArea: "hiden",
-      showScore: "hiden",
+      showSingOrPasteButtons: "hidden",
+      showTextArea: "hidden",
+      showScore: "hidden",
       lyric: "",
       computerPoints: 0,
-      userPoints: 0
+      userPoints: 0,
+      showAnswer: "hidden",
+      lyricResponce: {}
     };
   }
 
@@ -38,13 +41,17 @@ class Game extends Component {
   }
 
   onPlayClick() {
-    this.setState({ showPlayButton: "hiden", showSingOrPasteButtons: "" });
+    this.setState({
+      showPlayButton: "hidden",
+      showSingOrPasteButtons: "",
+      showScore: ""
+    });
     console.log(this.state);
   }
 
   onPasteTextClick() {
     this.setState({
-      showSingOrPasteButtons: "hiden",
+      showSingOrPasteButtons: "hidden",
       showTextArea: "",
       showScore: "",
       computerPoints: 0,
@@ -52,14 +59,22 @@ class Game extends Component {
     });
   }
 
-  onGuessByTextClick() {
+  async onGuessByTextClick() {
     console.log(this.state.lyric);
-    // const song = await axios.post(
-    //   `${baseUrl}recognizer/recognizeByLyric`,
-    //   { lyric: this.state.lyric }
-    // );
+    const song = await axios
+      .post(`${baseUrl}recognizer/recognizeByLyrics`, {
+        lyric: this.state.lyric
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    console.log(song);
 
-    this.setState({});
+    this.setState({
+      lyricResponce: song.data,
+      textarea: "hide",
+      showAnswer: ""
+    });
   }
 
   mouseLeave() {
@@ -88,6 +103,28 @@ class Game extends Component {
             second={this.state.computerPoints}
           />
         </div>
+        <div className={"textRed answer " + this.state.showAnswer}>
+          <div>
+            <p>
+              You have wished a song:{" "}
+              {this.state.lyricResponce?.song_name || ""}
+            </p>
+          </div>
+          {/* <iframe
+          scrolling="no"
+          frameborder="0"
+          allowTransparency="true"
+          src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${this.state.lyricResponce.}`}
+          width="700"
+          height="150"
+          ></iframe>  */}
+          <div>
+            <p>Am I corect?</p>
+            <button>YES</button>
+            <button>NO</button>
+          </div>
+        </div>
+
         <div className={"singOrPaste " + this.state.showSingOrPasteButtons}>
           <button>Sing song</button>
           <button onClick={this.onPasteTextClick}>Paste text</button>
@@ -116,9 +153,7 @@ class Game extends Component {
             value={this.state.value}
             onChange={this.onLyricChange}
           ></textarea>
-          <button className="textRed" onClick={this.onGuessByTextClick}>
-            Go
-          </button>
+          <button onClick={this.onGuessByTextClick}>Go</button>
         </div>
       </div>
     );
@@ -126,3 +161,14 @@ class Game extends Component {
 }
 
 export default Game;
+
+{
+  /* <iframe
+scrolling="no"
+frameborder="0"
+allowTransparency="true"
+src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=655095912"
+width="700"
+height="150"
+></iframe> */
+}
