@@ -43,6 +43,7 @@ def recognize_by_lyrics(request: WSGIRequest):
     return JsonResponse(
         data={
             "status": 200,
+            "track_id": deezer_response['data'][0]['id'],
             "song_name": deezer_response['data'][0]['title'],
             "path_to_artist_image": deezer_response['data'][0]['artist']['picture'],
             "path_to_audio": deezer_response['data'][0]['preview'],
@@ -64,6 +65,7 @@ def get_by_song(request, file_url):
     return JsonResponse(
         data={
             "status": res['status'],
+            "track_id": res['result']['deezer']['id'],
             "song_name": res['result']['deezer']['title'],
             "path_to_artist_image": res['result']['deezer']['artist']['picture'],
             "path_to_audio": res['result']['deezer']['preview'],
