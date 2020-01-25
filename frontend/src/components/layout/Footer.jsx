@@ -8,10 +8,7 @@ import whiteBuildings from "./Buildings__White.png";
 class Footer extends Component {
   constructor(props) {
     super(props);
-    // reference to the DOM node
     this.myElement = null;
-    // reference to the animation
-    this.myTween = null;
   }
   render() {
     return (
