@@ -33,7 +33,7 @@ and put in backend/backend/settings.py instead HERE
 TUNNEL_URL = 'HERE'
 ```
 
-Create your own API keys for And add your key to settings.py file:
+Create your own API keys for [audd.io](https://audd.io/) sevice. And add your key to [settings.py](https://github.com/kotsabiukmv98/MusicAkinator/blob/1a31602dce12e1adee959d8fefb974e383763964/backend/backend/settings.py#L133) file:
 
 ```
 AUDDIO_KEY = ''
