@@ -1,4 +1,5 @@
 # MusicAkinator
+
 Test task for int20h hackathon
 
 ## Requirements
@@ -9,7 +10,7 @@ Test task for int20h hackathon
 
 ## How to RUN backend local?
 
-``` 
+```
 $ ssh -R 80:localhost:8000 ssh.localhost.run
 
 ```
@@ -20,15 +21,26 @@ Connect to http://vlad-gj65.localhost.run or https://vlad-gj65.localhost.run
 
 ```
 
-Get second url: 
+Get second url:
+
 ```
 https://vlad-gj65.localhost.run
 ```
+
 and put in backend/backend/settings.py instead HERE
 
 ```python
 TUNNEL_URL = 'HERE'
 ```
+
+Create your own API keys for And add your key to settings.py file:
+
+```
+AUDDIO_KEY = ''
+```
+
+After that run command
+
 ```
 $ python3 manage.py runserver
 ```
@@ -39,10 +51,11 @@ Make sure you are in **frontend** folder
 
 Run following commands
 
-``` 
+```
 npm install
 
 npm start
 
 ```
+
 Go to localhost:3000
