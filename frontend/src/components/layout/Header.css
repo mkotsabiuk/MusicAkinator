@@ -1,4 +1,4 @@
-.firstSection {
+.description-section {
   background-color: #ffffff;
   margin-top: 20%;
 }
@@ -21,23 +21,23 @@
   font-family: "Montserrat";
   text-align: center;
 }
-.firstSection > .buttomLine {
+.description-section > .buttomLine {
   height: 3px;
   margin-top: 20%;
   background-color: black;
 }
 
-.secondSection {
+.rules-section {
   margin-top: 15%;
 }
-.secondSection > .text {
+.rules-section > .text {
   font-size: 1.7em;
   font-weight: 500;
   font-family: "Montserrat";
   line-height: 200%;
   text-align: center;
 }
-.secondSection > .img {
+.rules-section > .img {
   width: 10%;
   margin: 0 auto;
   margin-top: 10%;

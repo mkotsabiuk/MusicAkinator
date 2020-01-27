@@ -1,24 +1,24 @@
-.thirdSection {
+.footer {
   background-color: black;
 }
 .imgBack > img {
   width: 100%;
 }
 
-.musicAnimationContainer > * {
+.music-Keys > * {
   width: 3%;
   display: inline-block;
   padding-left: 12%;
 }
-.musicAnimationContainer {
+.music-Keys {
   position: relative;
   z-index: 3;
   top: -80px;
 }
-.buttomSector {
+.footer {
   margin-top: 20%;
 }
-.buttomSector > .divForP > p {
+.author > p {
   font-size: 1.5em;
   font-weight: 400;
   font-family: "Montserrat";
@@ -26,7 +26,7 @@
   padding-bottom: 5%;
   color: white;
 }
-.buttomSector > .divForP {
+.author {
   width: 100%;
   background-color: black;
 }
