@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
-import Score from "./Score";
-import Track from "./Track";
+import Score from "./score/Score";
+import Track from "./track/Track";
 import playButtonConture from "./playButtonConture.svg";
 import "./Game.css";
 
