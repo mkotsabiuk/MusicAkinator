@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
 import Score from "./Score";
+import Track from "./Track";
 import playButtonConture from "./playButtonConture.svg";
 import "./Game.css";
 
-const baseUrl = "https://musaki.azurewebsites.net/";
+// const baseUrl = "https://musaki.azurewebsites.net/";
+const baseUrl = "http://127.0.0.1:8000/";
 
 class Game extends Component {
   constructor(props) {
@@ -148,11 +150,11 @@ class Game extends Component {
           second={this.state.computerPoints}
         />
         <div className={"listOfSongs " + this.state.showListOfSongs}>
-          {this.tracks.map(function(item) {
+          {this.tracks.map(function (item) {
             return (
-              <div class="iFramesVertical">
+              <div className="iFramesVertical">
                 <iframe
-                  class="iFrames"
+                  className="iFrames"
                   scrolling="no"
                   frameborder="0"
                   allowTransparency="true"
@@ -166,28 +168,18 @@ class Game extends Component {
         </div>
         <div className={"textRed answer " + this.state.showAnswer}>
           <div>
-            <p class="answerUHave">
+            <p className="answerUHave">
               You have wished a song:{" "}
               {this.state.lyricResponce?.song_name || ""}
             </p>
           </div>
-          <div class="iFramesVertical">
-            <iframe
-              class="iFrames"
-              scrolling="no"
-              frameborder="0"
-              allowTransparency="true"
-              src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${this.state.lyricResponce.track_id}`}
-              width="70%"
-              height="20%"
-            ></iframe>
-          </div>
-          <div class="ansverAmICorect">
+          <Track id={this.state.lyricResponce.track_id} />
+          <div className="ansverAmICorect">
             <p>Am I corect?</p>
-            <button class="answerYesNo1" onClick={this.onCorrectAnswerClick}>
+            <button className="answerYesNo1" onClick={this.onCorrectAnswerClick}>
               YES
             </button>
-            <button class="answerYesNo2" onClick={this.onIncorrectAnswerClick}>
+            <button className="answerYesNo2" onClick={this.onIncorrectAnswerClick}>
               NO
             </button>
           </div>
@@ -216,7 +208,7 @@ class Game extends Component {
           />
         </div>
         <div className={"textArea " + this.state.showTextArea}>
-          <div class="pForTextArea">
+          <div className="pForTextArea">
             <p className="textRed">{this.state.textareaMessage}</p>
             <textarea
               value={this.state.lyric}
