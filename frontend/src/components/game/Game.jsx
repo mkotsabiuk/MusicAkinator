@@ -3,6 +3,7 @@ import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
 import Score from "./score/Score";
 import Track from "./track/Track";
+import Playlist from "./playlist/Playlist";
 import playButtonConture from "./playButtonConture.svg";
 import "./Game.css";
 
@@ -28,7 +29,7 @@ class Game extends Component {
     this.onIncorrectAnswerClick = this.onIncorrectAnswerClick.bind(this);
 
     this.tracks = [];
-    this.numberOfAttempt = 5;
+    this.numberOfAttempt = 2;
 
     this.state = {
       showPlayButton: "",
@@ -122,13 +123,13 @@ class Game extends Component {
 
     this.setState({
       attempt: this.state.attempt + 1,
-      showAnswer: "hidden",
       textareaMessage: `Let's try again! This is my ${this.state.attempt +
         1} attempt out of ${this.numberOfAttempt}.`,
       showTextArea: "",
       showAnswer: "hidden",
       showListOfSongs: "hidden"
     });
+    console.log(this.state);
   }
 
   onCorrectAnswerClick() {
@@ -149,23 +150,7 @@ class Game extends Component {
           first={this.state.userPoints}
           second={this.state.computerPoints}
         />
-        <div className={"listOfSongs " + this.state.showListOfSongs}>
-          {this.tracks.map(function (item) {
-            return (
-              <div className="iFramesVertical">
-                <iframe
-                  className="iFrames"
-                  scrolling="no"
-                  frameborder="0"
-                  allowTransparency="true"
-                  src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${item}`}
-                  width="70%"
-                  height="20%"
-                ></iframe>
-              </div>
-            );
-          })}
-        </div>
+        <Playlist hidden={this.state.showListOfSongs} tracks={this.tracks} />
         <div className={"textRed answer " + this.state.showAnswer}>
           <div>
             <p className="answerUHave">
