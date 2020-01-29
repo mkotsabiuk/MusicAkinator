@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import "./Score.css";
-// const kolai = "";
-class Score extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
+class Score extends Component {
   render() {
     return (
       <div className="score">

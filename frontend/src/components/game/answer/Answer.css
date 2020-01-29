@@ -1,0 +1,51 @@
+.yes-btn,
+.no-btn,
+.try-again-btn {
+    color: black;
+    padding: 2.5% 1% 2.5% 1%;
+    border-radius: 22%;
+    background-color: white;
+    vertical-align: top;
+    text-align: center;
+    margin-top: 4%;
+    font-size: 80%;
+    font-weight: 600;
+    font-family: "Montserrat";
+    cursor: pointer;
+    width: 13%;
+}
+.try-again-container {
+    display: flex;
+    justify-content: center;
+}
+
+.try-again-btn {
+    padding: 5% 1% 5% 1%;
+    font-size: 1.5vw;
+    width: 25%;
+}
+.yes-btn {
+    margin-right: 5%;
+}
+
+.no-btn {
+    margin-left: 5%;
+}
+
+ .check-div {
+    font-size: 2.5vw;
+    font-weight: 400;
+    font-family: "Montserrat";
+    text-align: center;
+    color: aliceblue;
+    margin-top: 4%;
+}
+
+.answer-name {
+    font-size: 2.5vw;
+    font-weight: 500;
+    font-family: "Montserrat";
+    text-align: center;
+    color: aliceblue;
+    margin-top: 10%;
+}

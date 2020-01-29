@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
 import Score from "./score/Score";
-import Track from "./track/Track";
 import Playlist from "./playlist/Playlist";
 import playButtonConture from "./playButtonConture.svg";
 import "./Game.css";
+import Answer from "./answer/Answer";
 
 // const baseUrl = "https://musaki.azurewebsites.net/";
 const baseUrl = "http://127.0.0.1:8000/";
@@ -25,8 +25,8 @@ class Game extends Component {
     this.onPasteTextClick = this.onPasteTextClick.bind(this);
     this.onLyricChange = this.onLyricChange.bind(this);
     this.onGuessByTextClick = this.onGuessByTextClick.bind(this);
-    this.onCorrectAnswerClick = this.onCorrectAnswerClick.bind(this);
-    this.onIncorrectAnswerClick = this.onIncorrectAnswerClick.bind(this);
+    this.onCorrectAnswer = this.onCorrectAnswer.bind(this);
+    this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
 
     this.tracks = [];
     this.numberOfAttempt = 2;
@@ -57,18 +57,17 @@ class Game extends Component {
       showSingOrPasteButtons: "",
       showListOfSongs: "hidden"
     });
-    console.log(this.state);
   }
 
   onPasteTextClick() {
     this.setState({
       showSingOrPasteButtons: "hidden",
-      showTextArea: ""
+      showTextArea: "",
+      textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`
     });
   }
 
   async onGuessByTextClick() {
-    console.log(this.state.lyric);
     const song = await axios
       .post(`${baseUrl}recognizer/recognizeByLyrics`, {
         lyric: this.state.lyric
@@ -76,16 +75,18 @@ class Game extends Component {
       .catch(error => {
         console.log(error);
       });
-    console.log(song);
 
     this.setState({
-      lyricResponce: song.data,
+      lyricResponce: song?.data,
       textarea: "hide",
       showAnswer: "",
       showTextArea: "hidden",
       lyric: ""
     });
-    this.tracks.push(this.state.lyricResponce.track_id);
+
+    if (this.state.lyricResponce) {
+      this.tracks.push(this.state.lyricResponce.track_id);
+    }
   }
 
   mouseLeave() {
@@ -105,45 +106,42 @@ class Game extends Component {
     this.setState({ lyric: event.target.value });
   }
 
-  onIncorrectAnswerClick() {
-    console.log(this.state.attempt);
+  onIncorrectAnswer() {
     if (this.state.attempt === this.numberOfAttempt) {
+      const userPoints = this.state.userPoints + 1;
       this.setState({
-        attempt: 0,
-        userPoints: this.state.userPoints + 1,
+        attempt: 1,
+        userPoints: userPoints,
         showPlayButton: "",
         showAnswer: "hidden",
-        textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`,
-        showTextArea: "hidden",
         showListOfSongs: ""
       });
 
       return;
     }
-
+    const attempt = this.state.attempt + 1;
     this.setState({
-      attempt: this.state.attempt + 1,
-      textareaMessage: `Let's try again! This is my ${this.state.attempt +
-        1} attempt out of ${this.numberOfAttempt}.`,
+      attempt: attempt,
+      textareaMessage: `Let's try again! This is my ${attempt} attempt out of ${this.numberOfAttempt}.`,
       showTextArea: "",
       showAnswer: "hidden",
       showListOfSongs: "hidden"
     });
-    console.log(this.state);
   }
-
-  onCorrectAnswerClick() {
+  onCorrectAnswer() {
+    const computerPoints = this.state.computerPoints + 1;
     this.setState({
-      attempt: 0,
-      computerPoints: this.state.computerPoints + 1,
+      attempt: 1,
+      computerPoints: computerPoints,
       showPlayButton: "",
       showAnswer: "hidden",
-      showListOfSongs: "",
-      textareaMessage: `Paste text of the song! This is my ${this.state.attempt} attempt out of ${this.numberOfAttempt}.`
+      showListOfSongs: ""
     });
   }
 
   render() {
+    const isLastAttempt = this.state.attempt === this.numberOfAttempt;
+
     return (
       <div className="playButton">
         <Score
@@ -151,24 +149,12 @@ class Game extends Component {
           second={this.state.computerPoints}
         />
         <Playlist hidden={this.state.showListOfSongs} tracks={this.tracks} />
-        <div className={"textRed answer " + this.state.showAnswer}>
-          <div>
-            <p className="answerUHave">
-              You have wished a song:{" "}
-              {this.state.lyricResponce?.song_name || ""}
-            </p>
-          </div>
-          <Track id={this.state.lyricResponce.track_id} />
-          <div className="ansverAmICorect">
-            <p>Am I corect?</p>
-            <button className="answerYesNo1" onClick={this.onCorrectAnswerClick}>
-              YES
-            </button>
-            <button className="answerYesNo2" onClick={this.onIncorrectAnswerClick}>
-              NO
-            </button>
-          </div>
-        </div>
+        <Answer
+          hidden={this.state.showAnswer}
+          onCorrectAnswer={this.onCorrectAnswer}
+          onIncorrectAnswer={this.onIncorrectAnswer}
+          lyric={this.state.lyricResponce}
+          isLast={isLastAttempt} />
 
         <div className={"singOrPaste " + this.state.showSingOrPasteButtons}>
           <button disabled>Sing song</button>
@@ -194,17 +180,17 @@ class Game extends Component {
         </div>
         <div className={"textArea " + this.state.showTextArea}>
           <div className="pForTextArea">
-            <p className="textRed">{this.state.textareaMessage}</p>
+            <p>{this.state.textareaMessage}</p>
             <textarea
               value={this.state.lyric}
               onChange={this.onLyricChange}
             ></textarea>
           </div>
-          <button className="textRed" onClick={this.onGuessByTextClick}>
+          <button className="go-btn" onClick={this.onGuessByTextClick}>
             Go
           </button>
         </div>
-      </div>
+      </div >
     );
   }
 }
