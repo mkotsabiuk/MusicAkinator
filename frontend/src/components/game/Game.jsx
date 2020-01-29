@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
+
 import Score from "./score/Score";
 import Playlist from "./playlist/Playlist";
-import playButtonConture from "./playButtonConture.svg";
-import "./Game.css";
 import Answer from "./answer/Answer";
+import PasteText from "./paste-text/PasteText";
+import "./Game.css";
+import playButtonConture from "./playButtonConture.svg";
 
 // const baseUrl = "https://musaki.azurewebsites.net/";
 const baseUrl = "http://127.0.0.1:8000/";
@@ -16,14 +18,11 @@ class Game extends Component {
     this.circleButton = null;
     this.circleButtonConture = null;
 
-    this.singOrPasteDiv = null;
-    this.playDiv = null;
-
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.onPlayClick = this.onPlayClick.bind(this);
     this.onPasteTextClick = this.onPasteTextClick.bind(this);
-    this.onLyricChange = this.onLyricChange.bind(this);
+    // this.onLyricChange = this.onLyricChange.bind(this);
     this.onGuessByTextClick = this.onGuessByTextClick.bind(this);
     this.onCorrectAnswer = this.onCorrectAnswer.bind(this);
     this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
@@ -35,7 +34,7 @@ class Game extends Component {
       showPlayButton: "",
       showSingOrPasteButtons: "hidden",
       showTextArea: "hidden",
-      lyric: "",
+      // lyric: "",
       computerPoints: 0,
       userPoints: 0,
       showAnswer: "hidden",
@@ -67,10 +66,10 @@ class Game extends Component {
     });
   }
 
-  async onGuessByTextClick() {
+  async onGuessByTextClick(lyric) {
     const song = await axios
       .post(`${baseUrl}recognizer/recognizeByLyrics`, {
-        lyric: this.state.lyric
+        lyric: lyric
       })
       .catch(error => {
         console.log(error);
@@ -78,10 +77,8 @@ class Game extends Component {
 
     this.setState({
       lyricResponce: song?.data,
-      textarea: "hide",
       showAnswer: "",
       showTextArea: "hidden",
-      lyric: ""
     });
 
     if (this.state.lyricResponce) {
@@ -102,9 +99,7 @@ class Game extends Component {
     });
   }
 
-  onLyricChange(event) {
-    this.setState({ lyric: event.target.value });
-  }
+
 
   onIncorrectAnswer() {
     if (this.state.attempt === this.numberOfAttempt) {
@@ -143,7 +138,7 @@ class Game extends Component {
     const isLastAttempt = this.state.attempt === this.numberOfAttempt;
 
     return (
-      <div className="playButton">
+      <div className="game">
         <Score
           first={this.state.userPoints}
           second={this.state.computerPoints}
@@ -160,6 +155,11 @@ class Game extends Component {
           <button disabled>Sing song</button>
           <button onClick={this.onPasteTextClick}>Paste text</button>
         </div>
+
+        <PasteText
+          hidden={this.state.showTextArea}
+          message={this.state.textareaMessage}
+          goClick={this.onGuessByTextClick} />
 
         <div
           className={"conteinerbodywithanim " + this.state.showPlayButton}
@@ -178,18 +178,8 @@ class Game extends Component {
             ref={img => (this.circleButtonConture = img)}
           />
         </div>
-        <div className={"textArea " + this.state.showTextArea}>
-          <div className="pForTextArea">
-            <p>{this.state.textareaMessage}</p>
-            <textarea
-              value={this.state.lyric}
-              onChange={this.onLyricChange}
-            ></textarea>
-          </div>
-          <button className="go-btn" onClick={this.onGuessByTextClick}>
-            Go
-          </button>
-        </div>
+
+
       </div >
     );
   }

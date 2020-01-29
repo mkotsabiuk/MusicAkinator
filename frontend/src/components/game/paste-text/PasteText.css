@@ -1,0 +1,34 @@
+.paste-text {
+    text-align: center;
+    margin-top: 13%;
+  }
+  .paste-text textarea {
+    font-size: 2vw;
+    font-weight: 600;
+    font-family: "Montserrat";
+    text-align: center;
+    padding-top: 4%;
+    margin-top: 2%;
+    padding: 0 10% 10% 10%;
+  }
+  
+  .go-btn {
+      color: black;
+      padding: 2.7% 2.7% 2.7% 2.7%;
+      border-radius: 22%;
+      background-color: white;
+      vertical-align: top;
+      margin-top: 6%;
+      font-size: 5vw;
+      font-weight: 600;
+      font-family: "Montserrat";
+      cursor: pointer;
+  }
+  .paste-text p  {
+      font-size: 2vw;
+      font-weight: 400;
+      font-family: "Montserrat";
+      text-align: center;
+      color: aliceblue;
+  }
+  
