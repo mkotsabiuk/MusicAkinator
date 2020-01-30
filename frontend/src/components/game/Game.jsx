@@ -9,8 +9,7 @@ import PasteText from "./paste-text/PasteText";
 import "./Game.css";
 import playButtonConture from "./playButtonConture.svg";
 
-// const baseUrl = "https://musaki.azurewebsites.net/";
-const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "https://musaki.azurewebsites.net/";
 
 class Game extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class Game extends Component {
     this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
 
     this.tracks = [];
-    this.numberOfAttempt = 2;
+    this.numberOfAttempt = 5;
 
     this.state = {
       showPlayButton: "",
