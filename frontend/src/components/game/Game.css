@@ -52,3 +52,10 @@
 .singOrPaste > *:nth-child(2) {
   margin-left: 20%;
 }
+
+
+.fake {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}

@@ -9,8 +9,8 @@ import PasteText from "./paste-text/PasteText";
 import "./Game.css";
 import playButtonConture from "./playButtonConture.svg";
 
-// const baseUrl = "https://musaki.azurewebsites.net/";
-const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "https://musaki.azurewebsites.net/";
+// const baseUrl = "http://127.0.0.1:8000/";
 
 class Game extends Component {
   constructor(props) {
@@ -130,11 +130,36 @@ class Game extends Component {
     });
   }
 
+  sendVoice() {
+    console.log('send voice');
+    let formData = new FormData();
+    var file = document.querySelector('#file');
+    console.log(file);
+    console.log(file.files[0]);
+    formData.append('file', file.files[0]);
+    axios.post(`${baseUrl}recognizer/upload_file`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    ).then(function () {
+      console.log('SUCCESS!!');
+    })
+      .catch(function () {
+        console.log('FAILURE!!');
+      });
+
+    console.log('end');
+  }
   render() {
     const isLastAttempt = this.state.attempt === this.numberOfAttempt;
 
     return (
       <div className="game">
+        <button className="fake" onClick={this.sendVoice}></button>
+        <input className="fake" type="file" id="file" />
         <Score
           first={this.state.userPoints}
           second={this.state.computerPoints}
