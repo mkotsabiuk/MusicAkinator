@@ -18,7 +18,7 @@ class MusicKey extends Component {
 
   render() {
     return (
-      <div className="musicAnimation1" ref={div => (this.musicKey = div)}>
+      <div ref={div => (this.musicKey = div)}>
         <img src={musicKey} alt="Music key image"></img>
       </div>
     );

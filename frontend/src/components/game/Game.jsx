@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { TimelineMax, TweenLite, Power0 } from "gsap";
-import Score from "./Score";
-import playButtonConture from "./playButtonConture.svg";
-import "./Game.css";
 
-const baseUrl = "https://musaki.azurewebsites.net/";
+import Score from "./score/Score";
+import Playlist from "./playlist/Playlist";
+import Answer from "./answer/Answer";
+import PasteText from "./paste-text/PasteText";
+import "./Game.css";
+import playButtonConture from "./playButtonConture.svg";
+
+// const baseUrl = "https://musaki.azurewebsites.net/";
+const baseUrl = "http://127.0.0.1:8000/";
 
 class Game extends Component {
   constructor(props) {
@@ -13,26 +18,21 @@ class Game extends Component {
     this.circleButton = null;
     this.circleButtonConture = null;
 
-    this.singOrPasteDiv = null;
-    this.playDiv = null;
-
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.onPlayClick = this.onPlayClick.bind(this);
     this.onPasteTextClick = this.onPasteTextClick.bind(this);
-    this.onLyricChange = this.onLyricChange.bind(this);
     this.onGuessByTextClick = this.onGuessByTextClick.bind(this);
-    this.onCorrectAnswerClick = this.onCorrectAnswerClick.bind(this);
-    this.onIncorrectAnswerClick = this.onIncorrectAnswerClick.bind(this);
+    this.onCorrectAnswer = this.onCorrectAnswer.bind(this);
+    this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
 
     this.tracks = [];
-    this.numberOfAttempt = 5;
+    this.numberOfAttempt = 2;
 
     this.state = {
       showPlayButton: "",
       showSingOrPasteButtons: "hidden",
       showTextArea: "hidden",
-      lyric: "",
       computerPoints: 0,
       userPoints: 0,
       showAnswer: "hidden",
@@ -54,35 +54,34 @@ class Game extends Component {
       showSingOrPasteButtons: "",
       showListOfSongs: "hidden"
     });
-    console.log(this.state);
   }
 
   onPasteTextClick() {
     this.setState({
       showSingOrPasteButtons: "hidden",
-      showTextArea: ""
+      showTextArea: "",
+      textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`
     });
   }
 
-  async onGuessByTextClick() {
-    console.log(this.state.lyric);
+  async onGuessByTextClick(lyric) {
     const song = await axios
       .post(`${baseUrl}recognizer/recognizeByLyrics`, {
-        lyric: this.state.lyric
+        lyric: lyric
       })
       .catch(error => {
         console.log(error);
       });
-    console.log(song);
 
     this.setState({
-      lyricResponce: song.data,
-      textarea: "hide",
+      lyricResponce: song?.data,
       showAnswer: "",
       showTextArea: "hidden",
-      lyric: ""
     });
-    this.tracks.push(this.state.lyricResponce.track_id);
+
+    if (this.state.lyricResponce) {
+      this.tracks.push(this.state.lyricResponce.track_id);
+    }
   }
 
   mouseLeave() {
@@ -98,105 +97,65 @@ class Game extends Component {
     });
   }
 
-  onLyricChange(event) {
-    this.setState({ lyric: event.target.value });
-  }
-
-  onIncorrectAnswerClick() {
-    console.log(this.state.attempt);
+  onIncorrectAnswer() {
     if (this.state.attempt === this.numberOfAttempt) {
+      const userPoints = this.state.userPoints + 1;
       this.setState({
-        attempt: 0,
-        userPoints: this.state.userPoints + 1,
+        attempt: 1,
+        userPoints: userPoints,
         showPlayButton: "",
         showAnswer: "hidden",
-        textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`,
-        showTextArea: "hidden",
         showListOfSongs: ""
       });
 
       return;
     }
-
+    const attempt = this.state.attempt + 1;
     this.setState({
-      attempt: this.state.attempt + 1,
-      showAnswer: "hidden",
-      textareaMessage: `Let's try again! This is my ${this.state.attempt +
-        1} attempt out of ${this.numberOfAttempt}.`,
+      attempt: attempt,
+      textareaMessage: `Let's try again! This is my ${attempt} attempt out of ${this.numberOfAttempt}.`,
       showTextArea: "",
       showAnswer: "hidden",
       showListOfSongs: "hidden"
     });
   }
-
-  onCorrectAnswerClick() {
+  onCorrectAnswer() {
+    const computerPoints = this.state.computerPoints + 1;
     this.setState({
-      attempt: 0,
-      computerPoints: this.state.computerPoints + 1,
+      attempt: 1,
+      computerPoints: computerPoints,
       showPlayButton: "",
       showAnswer: "hidden",
-      showListOfSongs: "",
-      textareaMessage: `Paste text of the song! This is my ${this.state.attempt} attempt out of ${this.numberOfAttempt}.`
+      showListOfSongs: ""
     });
   }
 
   render() {
+    const isLastAttempt = this.state.attempt === this.numberOfAttempt;
+
     return (
-      <div className="playButton">
+      <div className="game">
         <Score
           first={this.state.userPoints}
           second={this.state.computerPoints}
         />
-        <div className={"listOfSongs " + this.state.showListOfSongs}>
-          {this.tracks.map(function(item) {
-            return (
-              <div class="iFramesVertical">
-                <iframe
-                  class="iFrames"
-                  scrolling="no"
-                  frameborder="0"
-                  allowTransparency="true"
-                  src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${item}`}
-                  width="70%"
-                  height="20%"
-                ></iframe>
-              </div>
-            );
-          })}
-        </div>
-        <div className={"textRed answer " + this.state.showAnswer}>
-          <div>
-            <p class="answerUHave">
-              You have wished a song:{" "}
-              {this.state.lyricResponce?.song_name || ""}
-            </p>
-          </div>
-          <div class="iFramesVertical">
-            <iframe
-              class="iFrames"
-              scrolling="no"
-              frameborder="0"
-              allowTransparency="true"
-              src={`https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=000000&layout=&size=medium&type=tracks&id=${this.state.lyricResponce.track_id}`}
-              width="70%"
-              height="20%"
-            ></iframe>
-          </div>
-          <div class="ansverAmICorect">
-            <p>Am I corect?</p>
-            <button class="answerYesNo1" onClick={this.onCorrectAnswerClick}>
-              YES
-            </button>
-            <button class="answerYesNo2" onClick={this.onIncorrectAnswerClick}>
-              NO
-            </button>
-          </div>
-        </div>
+        <Playlist hidden={this.state.showListOfSongs} tracks={this.tracks} />
+        <Answer
+          hidden={this.state.showAnswer}
+          onCorrectAnswer={this.onCorrectAnswer}
+          onIncorrectAnswer={this.onIncorrectAnswer}
+          lyric={this.state.lyricResponce}
+          isLast={isLastAttempt} />
 
         <div className={"singOrPaste " + this.state.showSingOrPasteButtons}>
           <button disabled>Sing song</button>
           <button onClick={this.onPasteTextClick}>Paste text</button>
         </div>
+
+        <PasteText
+          hidden={this.state.showTextArea}
+          message={this.state.textareaMessage}
+          goClick={this.onGuessByTextClick} />
 
         <div
           className={"conteinerbodywithanim " + this.state.showPlayButton}
@@ -215,19 +174,9 @@ class Game extends Component {
             ref={img => (this.circleButtonConture = img)}
           />
         </div>
-        <div className={"textArea " + this.state.showTextArea}>
-          <div class="pForTextArea">
-            <p className="textRed">{this.state.textareaMessage}</p>
-            <textarea
-              value={this.state.lyric}
-              onChange={this.onLyricChange}
-            ></textarea>
-          </div>
-          <button className="textRed" onClick={this.onGuessByTextClick}>
-            Go
-          </button>
-        </div>
-      </div>
+
+
+      </div >
     );
   }
 }

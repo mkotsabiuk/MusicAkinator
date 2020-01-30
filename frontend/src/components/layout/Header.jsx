@@ -3,15 +3,15 @@ import "./Header.css";
 
 function Header() {
   return (
-    <div className="container">
-      <div className="firstSection">
+    <div className="header">
+      <div className="description-section">
         <div className="mText">
           <p className="gMusic">music akinator</p>
           <p className="teamPresent">by FFT team</p>
         </div>
         <div className="buttomLine"></div>
       </div>
-      <div className="secondSection">
+      <div className="rules-section">
         <div className="text">
           <p>We bring you in the game</p>
           <p>you need to make a song, then choose one of the options: </p>

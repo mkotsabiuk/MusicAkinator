@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import "./Score.css";
 
 class Score extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render(props) {
+  render() {
     return (
       <div className="score">
         <div className="cell">
