@@ -22,7 +22,6 @@ class Game extends Component {
     this.mouseLeave = this.mouseLeave.bind(this);
     this.onPlayClick = this.onPlayClick.bind(this);
     this.onPasteTextClick = this.onPasteTextClick.bind(this);
-    // this.onLyricChange = this.onLyricChange.bind(this);
     this.onGuessByTextClick = this.onGuessByTextClick.bind(this);
     this.onCorrectAnswer = this.onCorrectAnswer.bind(this);
     this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
@@ -34,7 +33,6 @@ class Game extends Component {
       showPlayButton: "",
       showSingOrPasteButtons: "hidden",
       showTextArea: "hidden",
-      // lyric: "",
       computerPoints: 0,
       userPoints: 0,
       showAnswer: "hidden",
@@ -98,8 +96,6 @@ class Game extends Component {
       repeat: -1
     });
   }
-
-
 
   onIncorrectAnswer() {
     if (this.state.attempt === this.numberOfAttempt) {

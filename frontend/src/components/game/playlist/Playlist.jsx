@@ -4,6 +4,9 @@ import './Playlist.css'
 
 class Playlist extends Component {
     render() {
+        if (this.props.tracks.length === 0)
+            return (<></>);
+
         return (
             <div className={this.props.hidden}>
                 <p className="title">Songs in this game:</p>
