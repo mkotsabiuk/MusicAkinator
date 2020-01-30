@@ -6,11 +6,13 @@ import Score from "./score/Score";
 import Playlist from "./playlist/Playlist";
 import Answer from "./answer/Answer";
 import PasteText from "./paste-text/PasteText";
+import AudioRecorder from "./audio-recorder/AudioRecorder";
 import "./Game.css";
+
 import playButtonConture from "./playButtonConture.svg";
 
-const baseUrl = "https://musaki.azurewebsites.net/";
-// const baseUrl = "http://127.0.0.1:8000/";
+// const baseUrl = "https://musaki.azurewebsites.net/";
+const baseUrl = "http://127.0.0.1:8000/";
 
 class Game extends Component {
   constructor(props) {
@@ -22,14 +24,18 @@ class Game extends Component {
     this.mouseLeave = this.mouseLeave.bind(this);
     this.onPlayClick = this.onPlayClick.bind(this);
     this.onPasteTextClick = this.onPasteTextClick.bind(this);
+    this.onSingSongClick = this.onSingSongClick.bind(this);
     this.onGuessByTextClick = this.onGuessByTextClick.bind(this);
+    this.onGuessBySingClick = this.onGuessBySingClick.bind(this);
     this.onCorrectAnswer = this.onCorrectAnswer.bind(this);
     this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
 
     this.tracks = [];
     this.numberOfAttempt = 2;
+    this.isAudioMode = true;
 
     this.state = {
+      record: false,
       showPlayButton: "",
       showSingOrPasteButtons: "hidden",
       showTextArea: "hidden",
@@ -39,7 +45,8 @@ class Game extends Component {
       lyricResponce: {},
       attempt: 1,
       textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`,
-      showListOfSongs: "hidden"
+      showListOfSongs: "hidden",
+      showAudio: "hidden"
     };
   }
 
@@ -57,9 +64,19 @@ class Game extends Component {
   }
 
   onPasteTextClick() {
+    this.isAudioMode = false;
     this.setState({
       showSingOrPasteButtons: "hidden",
       showTextArea: "",
+      textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`
+    });
+  }
+
+  onSingSongClick() {
+    this.isAudioMode = true;
+    this.setState({
+      showSingOrPasteButtons: "hidden",
+      showAudio: "",
       textareaMessage: `Paste text of the song! This is my 1 attempt out of ${this.numberOfAttempt}.`
     });
   }
@@ -83,7 +100,27 @@ class Game extends Component {
       this.tracks.push(this.state.lyricResponce.track_id);
     }
   }
+  async onGuessBySingClick(blob) {
+    let formData = new FormData();
+    formData.append("file", blob);
+    const headers = { 'Content-Type': 'multipart/form-data' };
+    console.log(blob);
 
+    const song = await axios.post(`${baseUrl}recognizer/upload_file`, formData, { headers: headers })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    this.setState({
+      lyricResponce: song?.data,
+      showAnswer: "",
+      showAudio: "hidden",
+    });
+
+    if (this.state.lyricResponce) {
+      this.tracks.push(this.state.lyricResponce.track_id);
+    }
+  }
   mouseLeave() {
     TweenLite.to(this.circleButton, 0.5, { scale: 1 });
   }
@@ -110,11 +147,21 @@ class Game extends Component {
 
       return;
     }
+
+    let showTextArea = "";
+    let showAudio = "";
+    if (this.isAudioMode) {
+      showTextArea = "hidden"
+    } else {
+      showAudio = "hidden";
+    }
+
     const attempt = this.state.attempt + 1;
     this.setState({
       attempt: attempt,
       textareaMessage: `Let's try again! This is my ${attempt} attempt out of ${this.numberOfAttempt}.`,
-      showTextArea: "",
+      showTextArea: showTextArea,
+      showAudio: showAudio,
       showAnswer: "hidden",
       showListOfSongs: "hidden"
     });
@@ -130,36 +177,11 @@ class Game extends Component {
     });
   }
 
-  sendVoice() {
-    console.log('send voice');
-    let formData = new FormData();
-    var file = document.querySelector('#file');
-    console.log(file);
-    console.log(file.files[0]);
-    formData.append('file', file.files[0]);
-    axios.post(`${baseUrl}recognizer/upload_file`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-    ).then(function () {
-      console.log('SUCCESS!!');
-    })
-      .catch(function () {
-        console.log('FAILURE!!');
-      });
-
-    console.log('end');
-  }
   render() {
     const isLastAttempt = this.state.attempt === this.numberOfAttempt;
-
+    // const file = "blob:https://hackingbeauty.github.io/4435881c-f2d2-44ae-993a-44cfb40603e5";
     return (
       <div className="game">
-        <button className="fake" onClick={this.sendVoice}></button>
-        <input className="fake" type="file" id="file" />
         <Score
           first={this.state.userPoints}
           second={this.state.computerPoints}
@@ -173,14 +195,18 @@ class Game extends Component {
           isLast={isLastAttempt} />
 
         <div className={"singOrPaste " + this.state.showSingOrPasteButtons}>
-          <button disabled>Sing song</button>
+          <button onClick={this.onSingSongClick}>Sing song</button>
           <button onClick={this.onPasteTextClick}>Paste text</button>
         </div>
-
+        <AudioRecorder
+          hidden={this.state.showAudio}
+          goClick={this.onGuessBySingClick}
+        />
         <PasteText
           hidden={this.state.showTextArea}
           message={this.state.textareaMessage}
           goClick={this.onGuessByTextClick} />
+
 
         <div
           className={"conteinerbodywithanim " + this.state.showPlayButton}
