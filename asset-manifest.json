@@ -1,28 +1,29 @@
 {
   "files": {
-    "main.css": "/MusicAkinator/static/css/main.445f5d18.chunk.css",
-    "main.js": "/MusicAkinator/static/js/main.61532ed2.chunk.js",
-    "main.js.map": "/MusicAkinator/static/js/main.61532ed2.chunk.js.map",
+    "main.css": "/MusicAkinator/static/css/main.94a79118.chunk.css",
+    "main.js": "/MusicAkinator/static/js/main.6efcc8f5.chunk.js",
+    "main.js.map": "/MusicAkinator/static/js/main.6efcc8f5.chunk.js.map",
     "runtime-main.js": "/MusicAkinator/static/js/runtime-main.da238535.js",
     "runtime-main.js.map": "/MusicAkinator/static/js/runtime-main.da238535.js.map",
     "static/css/2.f5298653.chunk.css": "/MusicAkinator/static/css/2.f5298653.chunk.css",
-    "static/js/2.b4675ea2.chunk.js": "/MusicAkinator/static/js/2.b4675ea2.chunk.js",
-    "static/js/2.b4675ea2.chunk.js.map": "/MusicAkinator/static/js/2.b4675ea2.chunk.js.map",
+    "static/js/2.00d0c229.chunk.js": "/MusicAkinator/static/js/2.00d0c229.chunk.js",
+    "static/js/2.00d0c229.chunk.js.map": "/MusicAkinator/static/js/2.00d0c229.chunk.js.map",
     "index.html": "/MusicAkinator/index.html",
-    "precache-manifest.0ddf7fdcea678338e10ecd672a9bd875.js": "/MusicAkinator/precache-manifest.0ddf7fdcea678338e10ecd672a9bd875.js",
+    "precache-manifest.8604f9a97e9f78b2ccd66b6e5aec0b1a.js": "/MusicAkinator/precache-manifest.8604f9a97e9f78b2ccd66b6e5aec0b1a.js",
     "service-worker.js": "/MusicAkinator/service-worker.js",
     "static/css/2.f5298653.chunk.css.map": "/MusicAkinator/static/css/2.f5298653.chunk.css.map",
-    "static/css/main.445f5d18.chunk.css.map": "/MusicAkinator/static/css/main.445f5d18.chunk.css.map",
-    "static/js/2.b4675ea2.chunk.js.LICENSE": "/MusicAkinator/static/js/2.b4675ea2.chunk.js.LICENSE",
+    "static/css/main.94a79118.chunk.css.map": "/MusicAkinator/static/css/main.94a79118.chunk.css.map",
+    "static/js/2.00d0c229.chunk.js.LICENSE": "/MusicAkinator/static/js/2.00d0c229.chunk.js.LICENSE",
     "static/media/cities.png": "/MusicAkinator/static/media/cities.156adf41.png",
+    "static/media/AudioRecorder.css": "/MusicAkinator/static/media/iconfont.c447c89a.ttf",
     "static/media/musicKey.svg": "/MusicAkinator/static/media/musicKey.0df35fa7.svg",
     "static/media/playButtonConture.svg": "/MusicAkinator/static/media/playButtonConture.33b6e009.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.da238535.js",
     "static/css/2.f5298653.chunk.css",
-    "static/js/2.b4675ea2.chunk.js",
-    "static/css/main.445f5d18.chunk.css",
-    "static/js/main.61532ed2.chunk.js"
+    "static/js/2.00d0c229.chunk.js",
+    "static/css/main.94a79118.chunk.css",
+    "static/js/main.6efcc8f5.chunk.js"
   ]
 }
