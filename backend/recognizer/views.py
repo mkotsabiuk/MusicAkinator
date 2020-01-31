@@ -14,14 +14,14 @@ from django.core.handlers.wsgi import WSGIRequest
 
 @csrf_exempt
 def upload_file(request):
-    if request.method == 'POST' and request.FILES['file']:
+    if request.method == 'POST' and request.FILES.get('file', False):
         myfile = request.FILES['file']
         fs = FileSystemStorage()
 
         filename = fs.save(uuid.uuid4().hex + '.mp3', myfile)
         uploaded_file_url = fs.url(filename)
 
-        return redirect('get-by-song', file_url=uploaded_file_url)
+        return redirect('get-by-song', file_url=uploaded_file_url[1:])
 
     return render(request, 'upload.html')
 

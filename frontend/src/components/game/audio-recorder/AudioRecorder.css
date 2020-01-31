@@ -1,0 +1,60 @@
+@import "./font/iconfont.css";
+
+.iconfont {
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-box {
+    width: 500px;
+    text-align: center;
+    background-color:  white;
+    display: inline-blo
+}
+
+.audioContainer {
+    padding-top: 10px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.audioContainer div {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.audioContainer canvas{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.audioContainer audio {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.go-btn {
+    color: black;
+    padding: 2.7% 2.7% 2.7% 2.7%;
+    border-radius: 22%;
+    background-color: white;
+    margin-top: 5%;
+    font-size: 5vw;
+    font-weight: 600;
+    font-family: "Montserrat";
+    cursor: pointer;
+    display: block;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.paste-text {
+    text-align: center;
+    margin-top: 13%;
+  }
