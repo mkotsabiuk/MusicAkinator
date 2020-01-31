@@ -11,7 +11,7 @@ import "./Game.css";
 
 import playButtonConture from "./playButtonConture.svg";
 
-// const baseUrl = "https://musaki.azurewebsites.net/";
+
 const baseUrl = "http://40.118.67.186:8000/";
 
 class Game extends Component {
@@ -31,7 +31,7 @@ class Game extends Component {
     this.onIncorrectAnswer = this.onIncorrectAnswer.bind(this);
 
     this.tracks = [];
-    this.numberOfAttempt = 2;
+    this.numberOfAttempt = 5;
     this.isAudioMode = true;
 
     this.state = {
