@@ -12,7 +12,7 @@ import "./Game.css";
 import playButtonConture from "./playButtonConture.svg";
 
 // const baseUrl = "https://musaki.azurewebsites.net/";
-const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "http://40.118.67.186:8000/";
 
 class Game extends Component {
   constructor(props) {
@@ -102,15 +102,16 @@ class Game extends Component {
   }
   async onGuessBySingClick(blob) {
     let formData = new FormData();
-    formData.append("file", blob);
-    const headers = { 'Content-Type': 'multipart/form-data' };
-    console.log(blob);
+    const file = new File([blob], "audio.mp3");
+    formData.append("file", file);
+    formData.append("file_type", "music");
+    console.log(file);
 
-    const song = await axios.post(`${baseUrl}recognizer/upload_file`, formData, { headers: headers })
+    const song = await axios.post(`${baseUrl}recognizer/upload_file`, formData)
       .catch((error) => {
         console.log(error);
       });
-
+    console.log(song);
     this.setState({
       lyricResponce: song?.data,
       showAnswer: "",

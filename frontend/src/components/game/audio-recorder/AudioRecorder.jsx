@@ -24,10 +24,10 @@ export default class AudioRecorder extends Component {
     }
 
     onClick() {
-        this.setState({ lyric: '', loader: true });
+        this.setState({ loader: true });
         this.props.goClick(this.state.blob)
             .then(() => {
-                this.setState({ loader: false });
+                this.setState({ loader: false, audioSrc: null });
             });
     }
 
