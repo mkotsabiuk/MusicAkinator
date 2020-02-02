@@ -47,6 +47,11 @@ $ python3 manage.py runserver
 
 ## How to RUN frontend local?
 
+Add [baseUrl value](https://github.com/kotsabiukmv98/MusicAkinator/blob/e593d43a2e140d216efc8e146c641b155e46e592/frontend/src/components/game/Game.jsx#L15) for your backend:
+
+```
+const baseUrl = "";
+```
 Make sure you are in **frontend** folder
 
 Run following commands
