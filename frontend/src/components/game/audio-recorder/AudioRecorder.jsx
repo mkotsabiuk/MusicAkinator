@@ -38,13 +38,13 @@ export default class AudioRecorder extends Component {
             status,
             audioSrc,
             startCallback: (e) => {
-                console.log("succ start", e);
+                // console.log("succ start", e);
                 this.setState({
                     goBtn: "go-btn hidden"
                 });
             },
             pauseCallback: (e) => {
-                console.log("succ pause", e);
+                // console.log("succ pause", e);
             },
             stopCallback: (e) => {
                 this.setState({
@@ -52,7 +52,7 @@ export default class AudioRecorder extends Component {
                     blob: e,
                     goBtn: "go-btn"
                 })
-                console.log("succ stop", e)
+                // console.log("succ stop", e)
             }
         }
         const hidden = this.state.loader ? 'hidden' : '';
