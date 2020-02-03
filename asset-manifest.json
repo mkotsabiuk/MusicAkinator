@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/MusicAkinator/static/css/main.671db80c.chunk.css",
-    "main.js": "/MusicAkinator/static/js/main.cae70e8a.chunk.js",
-    "main.js.map": "/MusicAkinator/static/js/main.cae70e8a.chunk.js.map",
+    "main.js": "/MusicAkinator/static/js/main.346bed15.chunk.js",
+    "main.js.map": "/MusicAkinator/static/js/main.346bed15.chunk.js.map",
     "runtime-main.js": "/MusicAkinator/static/js/runtime-main.da238535.js",
     "runtime-main.js.map": "/MusicAkinator/static/js/runtime-main.da238535.js.map",
     "static/css/2.7059d6b5.chunk.css": "/MusicAkinator/static/css/2.7059d6b5.chunk.css",
     "static/js/2.00d0c229.chunk.js": "/MusicAkinator/static/js/2.00d0c229.chunk.js",
     "static/js/2.00d0c229.chunk.js.map": "/MusicAkinator/static/js/2.00d0c229.chunk.js.map",
     "index.html": "/MusicAkinator/index.html",
-    "precache-manifest.09aa427a0cae50c645d24cb2999a8526.js": "/MusicAkinator/precache-manifest.09aa427a0cae50c645d24cb2999a8526.js",
+    "precache-manifest.c345eadeeff3713113bb7af84549dd47.js": "/MusicAkinator/precache-manifest.c345eadeeff3713113bb7af84549dd47.js",
     "service-worker.js": "/MusicAkinator/service-worker.js",
     "static/css/2.7059d6b5.chunk.css.map": "/MusicAkinator/static/css/2.7059d6b5.chunk.css.map",
     "static/css/main.671db80c.chunk.css.map": "/MusicAkinator/static/css/main.671db80c.chunk.css.map",
@@ -24,6 +24,6 @@
     "static/css/2.7059d6b5.chunk.css",
     "static/js/2.00d0c229.chunk.js",
     "static/css/main.671db80c.chunk.css",
-    "static/js/main.cae70e8a.chunk.js"
+    "static/js/main.346bed15.chunk.js"
   ]
 }
